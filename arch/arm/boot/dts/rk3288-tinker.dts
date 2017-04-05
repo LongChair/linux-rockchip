@@ -102,7 +102,7 @@
 	sound {
 		compatible = "simple-audio-card";
 		simple-audio-card,format = "i2s";
-		simple-audio-card,name = "rockchip,tinker-codec";
+		simple-audio-card,name = "TinkerBoard";
 		simple-audio-card,mclk-fs = <512>;
 
 		simple-audio-card,codec {
@@ -153,10 +153,11 @@
 	snps,reset-delays-us = <0 10000 1000000>;
 	tx_delay = <0x30>;
 	rx_delay = <0x10>;
-	status = "ok";
+	status = "okay";
 };
 
 &hdmi {
+	#sound-dai-cells = <0>;
 	ddc-i2c-bus = <&i2c5>;
 	status = "okay";
 };
@@ -197,7 +198,7 @@
 				regulator-always-on;
 				regulator-boot-on;
 				regulator-min-microvolt = <750000>;
-				regulator-max-microvolt = <1350000>;
+				regulator-max-microvolt = <1450000>;
 				regulator-name = "vdd_arm";
 				regulator-ramp-delay = <6000>;
 				regulator-state-mem {
@@ -355,6 +356,11 @@
 
 &i2c2 {
 	status = "okay";
+
+	eeprom@50 {
+		compatible = "at,24c08";
+		reg = <0x50>;
+	};
 };
 
 &i2c5 {
